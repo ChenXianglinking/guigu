@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新时的一个问题</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 遍历数组 -->
+        <h2>人员管理</h2>
+        <button @click="updatemei">更新马冬梅</button>
+        <ul>
+            <li v-for="(a, index) in arr" :key="a.id">
+                {{a.name}}--{{a.age}}--{{a.sex}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                arr: [
+                    {id:'001',name:'马冬梅',age:'18',sex:'男'},
+                    {id:'002',name:'周冬雨',age:'20',sex:'女'},
+                    {id:'003',name:'周杰伦',age:'30',sex:'女'},
+                    {id:'004',name:'温兆伦',age:'40',sex:'男'}
+                ],
+            },
+            methods: {
+                updatemei(){
+                    // this.arr[0].name = 'ma' //可以
+                    this.arr[0] = {id:'001',name:'马',age:'50',sex:'男'}
+                }
+            }
+        })
+    </script>
+</body>
+</html>

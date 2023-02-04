@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>key的原理</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 遍历数组 -->
+        <h2>人员管理</h2>
+        <input type="text" v-model="keyName" placeholder="此处输入搜索的名字">
+        <ul>
+            <li v-for="(a, index) in filterArr" :key="a.id">
+                {{a.name}}--{{a.age}}--{{a.sex}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                keyName:'',
+                arr: [
+                    {id:'001',name:'马冬梅',age:'18',sex:'男'},
+                    {id:'002',name:'周冬雨',age:'20',sex:'女'},
+                    {id:'003',name:'周杰伦',age:'30',sex:'女'},
+                    {id:'004',name:'温兆伦',age:'40',sex:'男'}
+                ],
+                // filterArr: []
+            },
+            // watch: {
+            //     keyName: {
+            //         immediate: true,
+            //         handler(value){
+            //             return this.filterArr = this.arr.filter(p => p.name.indexOf(value) !== -1)
+            //         }
+            //     }
+            // }
+            computed: {
+                filterArr(){
+                    return this.arr.filter(p => p.name.indexOf(this.keyName) !== -1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

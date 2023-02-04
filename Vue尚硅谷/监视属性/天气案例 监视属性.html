@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../Vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>今天天气很{{tianqi}}</h3>
+        <button @click="huan">切换天气</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isHot: true
+            },
+            computed: {
+                tianqi(){
+                    return this.isHot?'炎热':'凉爽';
+                }
+            },
+            methods: {
+                huan(){
+                    this.isHot = !this.isHot; 
+                }
+            },
+            // watch:{
+            //     isHot:{
+            //         //immediate函数在初始化时调用一下handler函数
+            //         immediate: true,
+            //         //handler函数在监视的isHot发生变化时调用
+            //         handler(newValue, oldValue){
+            //             return console.log('isHot被修改了',newValue,oldValue);
+            //         }
+            //     }
+            // }
+        });
+
+        vm.$watch('tianqi',{
+            handler(newValue, oldValue){
+                console.log('昨天天气很'+oldValue+',今天天气很'+newValue);
+            }
+        })
+    </script>
+</body>
+</html>

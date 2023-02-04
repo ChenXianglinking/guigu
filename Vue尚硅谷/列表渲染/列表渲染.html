@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 遍历数组 -->
+        <h2>人员管理</h2>
+        <ul>
+            <li v-for="(a, index) in arr" :key="index">
+                {{a.id}}--{{a.name}}--{{a.age}}
+            </li>
+        </ul>
+        <br>
+        <!-- 遍历对象 -->
+        <h2>汽车信息</h2>
+        <ul>
+            <li v-for="(o, k) in obj" :key="k">
+                {{o}}-{{k}}
+            </li>
+        </ul>
+        <br>
+
+        <!-- 遍历字符串 -->
+        <ul>
+            <li v-for="(char, index) in str" ::key="index">{{char}}</li>
+        </ul>
+        <br>
+
+        <!-- 遍历指定次数 -->
+        <ul>
+            <li v-for="(number, index) in 5" ::key="index">{{number}}</li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                arr: [
+                    {id:'001',name:'张三',age:'18'},
+                    {id:'002',name:'李四',age:'20'},
+                    {id:'003',name:'王五',age:'30'},
+                ],
+                obj: {
+                    name: '奥迪A8',
+                    price: '80w',
+                    color: '黑色'
+                },
+                str: 'hello'
+            }
+        })
+    </script>
+</body>
+</html>

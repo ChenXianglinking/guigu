@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例 深度监视</title>
+    <script src="../../Vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>今天天气很{{tianqi}}</h3>
+        <button @click="huan">切换天气</button>
+        <p>a:{{ab.a}}</p>
+        <button @click="ab.a++">a+1</button>
+        <p>b:{{ab.b}}</p>
+        <button @click="ab.b++">b+1</button>
+        <p>d:{{ab.c.d}}</p>
+        <button @click="ab.c.d++">d+1</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isHot: true,
+                ab: {
+                    a: 1,
+                    b: 1,
+                    c: {
+                        d: 1
+                    }
+                }
+            },
+            computed: {
+                tianqi(){
+                    return this.isHot?'炎热':'凉爽';
+                }
+            },
+            methods: {
+                huan(){
+                    this.isHot = !this.isHot; 
+                }
+            },
+            watch:{
+                isHot:{
+                    //immediate函数在初始化时调用一下handler函数
+                    immediate: true,
+                    //handler函数在监视的isHot发生变化时调用
+                    handler(newValue, oldValue){
+                        return console.log('isHot被修改了',newValue,oldValue);
+                    }
+                },
+                'ab.a': {
+                    handler(){
+                        console.log('a改变了');
+                    }
+                },
+                'ab.b': {
+                    handler(){
+                        console.log('b改变了');
+                    }
+                },
+                'ab.c.d': {
+                    handler(){
+                        console.log('d改变了');
+                    }
+                },
+                ab: {
+                    deep: true,
+                    handler(){
+                        console.log('ab改变了');
+                    }
+                }
+            }
+        });
+
+        // vm.$watch('tianqi',{
+        //     handler(newValue, oldValue){
+        //         console.log('昨天天气很'+oldValue+',今天天气很'+newValue);
+        //     }
+        // })
+    </script>
+</body>
+</html>

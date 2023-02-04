@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表排序</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 遍历数组 -->
+        <h2>人员管理</h2>
+        <input type="text" v-model="keyName" placeholder="此处输入搜索的名字">
+        <button @click="sorttype = 1">年龄升序</button>
+        <button @click="sorttype = 2">年龄降序</button>
+        <button @click="sorttype = 0">原顺序</button>
+        <h2>{{arr[0].kh}}</h2>
+        <ul>
+            <li v-for="(a, index) in filterArr" :key="a.id">
+                {{a.name}}--{{a.age}}--{{a.sex}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                keyName:'',
+                sorttype: 0,    //0原顺序 1升序 2降序
+                arr: [
+                    {id:'001',name:'马冬梅',age:'38',sex:'男'},
+                    {id:'002',name:'周冬雨',age:'28',sex:'女'},
+                    {id:'003',name:'周杰伦',age:'18',sex:'女'},
+                    {id:'004',name:'温兆伦',age:'48',sex:'男'}
+                ],
+            },
+            computed: {
+                filterArr(){
+                    const arr = this.arr.filter(p => p.name.indexOf(this.keyName) !== -1)
+                    //判断一下是否需要排序
+                    if(this.sorttype)
+                    {
+                        arr.sort((p1,p2)=>{
+                            return this.sorttype === 1 ? p1.age-p2.age : p2.age-p1.age
+                        })
+                    }
+                    return arr
+                }
+            },
+        })
+    </script>
+</body>
+</html>

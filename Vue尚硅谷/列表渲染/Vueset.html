@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vueset</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 遍历数组 -->
+        <h2>人员管理</h2>
+        <button @click="addSex">添加sex</button>
+        <h3>{{user.name}}</h3>
+        <h3>{{user.age}}</h3>
+        <h3 v-if="user.sex">{{user.sex}}</h3>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                user: {
+                    name: 'haha',
+                    age: 18
+                }
+            },
+            methods: {
+                addSex() {
+                    Vue.set(this.user,'sex','男')
+                    // this.$set(this.user,'sex','男')//在控制台是Vue.set(vm.user,'sex','男')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

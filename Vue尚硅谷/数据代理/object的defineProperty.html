@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let number = 19;
+        let ren = {
+            name: 'MR.Chen',
+            sex: '男',
+        }
+
+        Object.defineProperty(ren, 'age', {
+            // value: 18,
+            // enumerable: true, //控制是否可枚举，默认值是false
+            // writable: true, //控制是否可修改，默认值是false
+            // configurable: true, //控制是否可删除，默认值是false
+
+            //当这个属性被读取时，getter就会被调用
+            get(){
+                console.log('被读取了');
+                return number
+            },
+            //当这个属性被修改时，setter就会被调用
+            set(value){
+                console.log('被修改了');
+                number = value;
+            }
+        })
+    </script>
+</body>
+</html>
